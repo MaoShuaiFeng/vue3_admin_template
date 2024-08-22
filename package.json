@@ -9,10 +9,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@element-plus/icons-vue": "^2.3.1",
+    "element-plus": "^2.8.0",
     "vue": "^3.4.37"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
+    "@types/node": "^22.5.0",
     "@vitejs/plugin-vue": "^5.1.2",
     "eslint": "^9.9.0",
     "eslint-plugin-vue": "^9.27.0",
