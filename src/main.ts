@@ -9,7 +9,7 @@ import "virtual:svg-icons-register"; //svg插件需要配置代码
 
 import GlobalComponent from "./components";
 
-import "./style/index.scss"
+import "./style/index.scss"; // 导入全局样式
 
 const app = createApp(App); // 使用createApp创建一个vue实例
 
