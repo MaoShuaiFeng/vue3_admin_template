@@ -4,12 +4,10 @@ import ElementPlus from "element-plus"; // 从element-plus中导入ElementPlus
 import "element-plus/dist/index.css"; // 导入element-plus的css样式
 import App from "./App.vue"; // 从App.vue中导入App
 import zhCn from "element-plus/es/locale/lang/zh-cn";
-
 import "virtual:svg-icons-register"; //svg插件需要配置代码
-
-import GlobalComponent from "./components";
-
+import GlobalComponent from "./components"; //引入自定义插件：注册整个项目的全局组件
 import "./style/index.scss"; // 导入全局样式
+import router from "./router"; //引入路由
 
 const app = createApp(App); // 使用createApp创建一个vue实例
 
@@ -17,6 +15,7 @@ app
   .use(ElementPlus, {
     locale: zhCn,
   })
-  .use(GlobalComponent);
+  .use(GlobalComponent)
+  .use(router);
 
 app.mount("#app"); // 将vue实例挂载到id为app的元素上
