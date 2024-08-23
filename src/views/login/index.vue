@@ -3,16 +3,21 @@
     <el-row>
       <el-col :span="12" :xs="0"></el-col>
       <el-col :span="12" :xs="24">
-        <el-form class="login_form">
+        <el-form
+          ref="loginFormRef"
+          :model="loginForm"
+          :rules="rules"
+          class="login_form"
+        >
           <h1>Hello</h1>
           <h2>welcome</h2>
-          <el-form-item>
+          <el-form-item prop="username">
             <el-input
               v-model="loginForm.username"
               :prefix-icon="User"
             ></el-input>
           </el-form-item>
-          <el-form-item>
+          <el-form-item prop="password">
             <el-input
               v-model="loginForm.password"
               type="password"
@@ -47,6 +52,8 @@ import { getTime } from "../../utils/time";
 let useStore = useUserStore();
 let $router = useRouter();
 
+let loginFormRef = ref();
+
 //收集账号密码数据
 let loginForm = reactive({
   username: "admin",
@@ -57,7 +64,9 @@ let loading = ref(false);
 //登录按钮回调
 const login = async () => {
   //通知仓库发送登录请求，成功：跳转首页，失败：提示
+  await loginFormRef.value.validate();
   try {
+    //表单校验通过再发请求
     loading.value = true;
     await useStore.userLogin(loginForm);
     $router.push("/");
@@ -67,7 +76,6 @@ const login = async () => {
       type: "success",
     });
   } catch (error) {
-    console.log(error);
     ElNotification({
       message: (error as Error).message,
       type: "error",
@@ -75,6 +83,36 @@ const login = async () => {
   } finally {
     loading.value = false;
   }
+};
+//自定义校验规则函数
+const validatorUsername = (rule: any, value: string, callback: any) => {
+  if (value.length < 5) {
+    callback(new Error("账号长度不能小于5位"));
+  } else {
+    callback();
+  }
+};
+const validatorPassword = (rule: any, value: string, callback: any) => {
+  if (value.length < 5) {
+    callback(new Error("密码长度不能小于5位"));
+  } else {
+    callback();
+  }
+};
+//验证规则
+const rules = {
+  username: [
+    {
+      trigger: "change",
+      validator: validatorUsername,
+    },
+  ],
+  password: [
+    {
+      trigger: "change",
+      validator: validatorPassword,
+    },
+  ],
 };
 </script>
 
