@@ -1,15 +1,13 @@
 <template>
   <div>
-    <h1>test</h1>
+    <h1>app</h1>
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
 
-<style scoped lang="scss">
-div {
-  h1 {
-    color: red;
-  }
-}
+</script>
+
+<style scoped>
+
 </style>
