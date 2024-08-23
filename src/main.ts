@@ -8,6 +8,7 @@ import "virtual:svg-icons-register"; //svg插件需要配置代码
 import GlobalComponent from "./components"; //引入自定义插件：注册整个项目的全局组件
 import "./style/index.scss"; // 导入全局样式
 import router from "./router"; //引入路由
+import pinia from "./store"; //引入仓库
 
 const app = createApp(App); // 使用createApp创建一个vue实例
 
@@ -16,6 +17,7 @@ app
     locale: zhCn,
   })
   .use(GlobalComponent)
-  .use(router);
+  .use(router)
+  .use(pinia);
 
 app.mount("#app"); // 将vue实例挂载到id为app的元素上

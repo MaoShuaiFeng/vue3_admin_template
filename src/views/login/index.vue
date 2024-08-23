@@ -21,7 +21,12 @@
             ></el-input>
           </el-form-item>
           <el-form-item>
-            <el-button class="login_btn" type="primary" size="default"
+            <el-button
+              :loading="loading"
+              class="login_btn"
+              type="primary"
+              size="default"
+              @click="login"
               >登录</el-button
             >
           </el-form-item>
@@ -33,12 +38,44 @@
 
 <script setup lang="ts">
 import { User, Lock } from "@element-plus/icons-vue";
-import { reactive } from "vue";
+import { reactive, ref } from "vue";
+import useUserStore from "../../store/modules/user";
+import { useRouter } from "vue-router";
+import { ElNotification } from "element-plus";
+import { getTime } from "../../utils/time";
+
+let useStore = useUserStore();
+let $router = useRouter();
+
 //收集账号密码数据
 let loginForm = reactive({
   username: "admin",
   password: "111111",
 });
+
+let loading = ref(false);
+//登录按钮回调
+const login = async () => {
+  //通知仓库发送登录请求，成功：跳转首页，失败：提示
+  try {
+    loading.value = true;
+    await useStore.userLogin(loginForm);
+    $router.push("/");
+    ElNotification({
+      title: `HI,${getTime()}`,
+      message: "欢迎回来",
+      type: "success",
+    });
+  } catch (error) {
+    console.log(error);
+    ElNotification({
+      message: (error as Error).message,
+      type: "error",
+    });
+  } finally {
+    loading.value = false;
+  }
+};
 </script>
 
 <style scoped lang="scss">
@@ -53,6 +90,7 @@ let loginForm = reactive({
   position: relative;
   width: 80%;
   top: 30vh;
+  border-radius: 20px;
   background: url("@/assets/images/background.jpg") no-repeat;
   background-size: cover;
   padding: 40px;
