@@ -16,7 +16,7 @@
     <div class="layout_tabbar">2</div>
     <!-- 内容展示区 -->
     <div class="layout_main">
-        <p style="height: 10000px; background-color: red">123</p>
+      <p style="height: 10000px; background-color: red">123</p>
     </div>
   </div>
 </template>
@@ -55,7 +55,7 @@ let userStore = useUserStore();
     .scrollbar {
       width: 100%;
       height: calc(100vh - $base-menu-logo-height);
-      .el-menu{
+      .el-menu {
         border-right: none;
       }
     }

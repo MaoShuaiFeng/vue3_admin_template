@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <!-- 使用use元素引入svg图标，并设置fill属性为黄色 -->
+  <!-- 使用use元素引入svg图标，并设置fill属性为黄色 -->
+  <template v-if="type === 'svg'">
     <svg>
       <use
         :xlink:href="prefix + name"
@@ -9,11 +9,20 @@
         :height="height"
       ></use>
     </svg>
-  </div>
+  </template>
+  <template v-else>
+    <el-icon>
+      <component :is="name"></component>
+    </el-icon>
+  </template>
 </template>
 
 <script setup lang="ts">
 defineProps({
+  type: {
+    type: String,
+    default: "elicon",
+  },
   prefix: {
     type: String,
     default: "#icon-",

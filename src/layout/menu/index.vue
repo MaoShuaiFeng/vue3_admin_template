@@ -8,9 +8,7 @@
         :index="item.path"
       >
         <template #title>
-          <el-icon>
-            <component :is="item.meta.icon"></component>
-          </el-icon>
+          <svg-icon :name="item.meta.icon"></svg-icon>
           <span>{{ item.meta.title }}</span>
         </template>
       </el-menu-item>
@@ -23,9 +21,7 @@
         :index="item.children[0].path"
       >
         <template #title>
-          <el-icon>
-            <component :is="item.children[0].meta.icon"></component>
-          </el-icon>
+          <svg-icon :name="item.children[0].meta.icon"></svg-icon>
           <span>{{ item.children[0].meta.title }}</span>
         </template>
       </el-menu-item>
@@ -37,9 +33,7 @@
       :index="item.path"
     >
       <template #title>
-        <el-icon>
-          <component :is="item.meta.icon"></component>
-        </el-icon>
+        <svg-icon :name="item.meta.icon"></svg-icon>
         <span>{{ item.meta.title }}</span>
       </template>
       <!-- 递归组件 -->
