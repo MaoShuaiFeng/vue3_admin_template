@@ -1,7 +1,5 @@
 <template>
   <div>
-    <h1>SVG测试</h1>
-    <!-- 测试图标 -->
     <!-- 使用use元素引入svg图标，并设置fill属性为黄色 -->
     <svg>
       <use

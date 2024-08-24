@@ -16,6 +16,7 @@ export const constantRoutes = [
     meta: {
       title: "layout",
       hidden: false,
+      icon: "Promotion",
     },
     children: [
       {
@@ -25,6 +26,7 @@ export const constantRoutes = [
         meta: {
           title: "首页",
           hidden: false,
+          icon: "HomeFilled", //图标,支持element-plus的图标库图标
         },
       },
     ],

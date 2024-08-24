@@ -3,20 +3,20 @@
     <!-- 左侧菜单 -->
     <div class="layout_slider">
       <CLogo></CLogo>
-      <!-- 展示菜单 -->C
+      <!-- 展示菜单 -->
       <!-- 滚动组件 -->
       <el-scrollbar class="scrollbar">
         <!-- 菜单组件 -->
         <el-menu>
           <CMenu :menuList="userStore.menuRoutes"></CMenu>
         </el-menu>
-      </el-scrollbar>C
+      </el-scrollbar>
     </div>
     <!-- 顶部菜单 -->
     <div class="layout_tabbar">2</div>
     <!-- 内容展示区 -->
     <div class="layout_main">
-      <p style="height: 10000px; background-color: red">123</p>
+        <p style="height: 10000px; background-color: red">123</p>
     </div>
   </div>
 </template>
