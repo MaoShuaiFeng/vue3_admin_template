@@ -2,23 +2,15 @@
   <div class="layout_container">
     <!-- 左侧菜单 -->
     <div class="layout_slider">
-      <Logo></Logo>
-      <!-- 展示菜单 -->
+      <CLogo></CLogo>
+      <!-- 展示菜单 -->C
       <!-- 滚动组件 -->
       <el-scrollbar class="scrollbar">
         <!-- 菜单组件 -->
         <el-menu>
-          <el-menu-item index="1">首页</el-menu-item>
-          <el-menu-item index="2">数据大屏</el-menu-item>
-          <!-- 折叠菜单 -->
-          <el-sub-menu index="3">
-            <template #title>权限管理</template>
-            <el-menu-item index="3-1">用户管理</el-menu-item>
-            <el-menu-item index="3-2">角色管理</el-menu-item>
-            <el-menu-item index="3-3">菜单管理</el-menu-item>
-          </el-sub-menu>
+          <CMenu :menuList="userStore.menuRoutes"></CMenu>
         </el-menu>
-      </el-scrollbar>
+      </el-scrollbar>C
     </div>
     <!-- 顶部菜单 -->
     <div class="layout_tabbar">2</div>
@@ -30,7 +22,12 @@
 </template>
 
 <script setup lang="ts">
-import Logo from "@/layout/logo/index.vue";
+import CLogo from "@/layout/logo/index.vue";
+import CMenu from "@/layout/menu/index.vue";
+//获取用户相关小仓库C
+import useUserStore from "@/store/modules/user";
+
+let userStore = useUserStore();
 </script>
 
 <style scoped lang="scss">
@@ -58,6 +55,9 @@ import Logo from "@/layout/logo/index.vue";
     .scrollbar {
       width: 100%;
       height: calc(100vh - $base-menu-logo-height);
+      .el-menu{
+        border-right: none;
+      }
     }
   }
   .layout_tabbar {

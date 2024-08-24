@@ -4,11 +4,14 @@ import { reqLogin } from "@/api/user";
 import type { loginForm, loginResponseData } from "../../api/user/type";
 import type { UserState } from "./types/types";
 import { SET_TOKEN, GET_TOKEN } from "../../utils/token";
+//引入常量路由
+import { constantRoutes } from "@/router/routes";
 
 const useUserStore = defineStore("User", {
   state: (): UserState => {
     return {
-      token: GET_TOKEN(),
+      token: GET_TOKEN(),//用户唯一标识
+      menuRoutes: constantRoutes,//仓库存储菜单需要的数组（路由）
     };
   },
   getters: {},
