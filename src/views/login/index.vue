@@ -120,7 +120,7 @@ const rules = {
 .login_container {
   width: 100%;
   height: 100vh;
-  background: url("@/assets/images/background.jpg") no-repeat;
+  background: url("@/assets/images/background.png") no-repeat;
   background-size: cover;
 }
 
@@ -128,10 +128,12 @@ const rules = {
   position: relative;
   width: 80%;
   top: 30vh;
-  border-radius: 20px;
-  background: url("@/assets/images/background.jpg") no-repeat;
-  background-size: cover;
   padding: 40px;
+  background: rgba(206, 204, 204, 0.3);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border-radius: 25px;
+  box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.2);
 
   h1 {
     color: white;

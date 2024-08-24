@@ -66,4 +66,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped lang="scss">
+ .el-menu-item.is-active {
+    background-color: rgb(140, 146, 230);
+  }
+</style>
