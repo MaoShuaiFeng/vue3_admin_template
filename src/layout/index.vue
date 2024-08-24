@@ -16,7 +16,7 @@
     <div class="layout_tabbar">2</div>
     <!-- 内容展示区 -->
     <div class="layout_main">
-      <p style="height: 10000px; background-color: red">123</p>
+      <CMain></CMain>
     </div>
   </div>
 </template>
@@ -24,7 +24,8 @@
 <script setup lang="ts">
 import CLogo from "@/layout/logo/index.vue";
 import CMenu from "@/layout/menu/index.vue";
-//获取用户相关小仓库C
+import CMain from "@/layout/main/index.vue";
+//获取用户相关小仓库
 import useUserStore from "@/store/modules/user";
 
 let userStore = useUserStore();

@@ -1,11 +1,11 @@
 <template>
-  <template v-for="item in menuList" :key="item.path">
+  <template v-for="item in menuList" :key="item.name">
     <!-- 没有子路由 -->
     <template v-if="!item.children">
       <el-menu-item
         v-if="!item.meta.hidden"
         @click="goRoute"
-        :index="item.path"
+        :index="item.name"
       >
         <template #title>
           <svg-icon :name="item.meta.icon"></svg-icon>
@@ -18,7 +18,8 @@
     <template v-if="item.children && item.children.length === 1">
       <el-menu-item
         v-if="!item.children[0].meta.hidden"
-        :index="item.children[0].path"
+        @click="goRoute"
+        :index="item.children[0].name"
       >
         <template #title>
           <svg-icon :name="item.children[0].meta.icon"></svg-icon>
@@ -30,7 +31,7 @@
     <!-- 有多个子路由 -->
     <el-sub-menu
       v-if="item.children && item.children.length > 1"
-      :index="item.path"
+      :index="item.name"
     >
       <template #title>
         <svg-icon :name="item.meta.icon"></svg-icon>
@@ -43,11 +44,20 @@
 </template>
 
 <script setup lang="ts">
+import {
+  RouteLocationAsPathGeneric,
+  RouteLocationAsRelativeGeneric,
+  useRouter,
+} from "vue-router";
 //获取父组件传递过来的路由数组
 defineProps(["menuList"]);
+
+const $router = useRouter();
 //点击菜单回调
-const goRoute = (vc) => {
-  console.log(vc.index);
+const goRoute = (vc: {
+  index: string | RouteLocationAsRelativeGeneric | RouteLocationAsPathGeneric;
+}) => {
+  $router.push({ name: String(vc.index) });
 };
 </script>
 <script lang="ts">
