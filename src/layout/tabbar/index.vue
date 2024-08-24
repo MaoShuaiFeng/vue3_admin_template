@@ -13,6 +13,11 @@
 import CBreadcrumb from "@/layout/tabbar/breadcrumb/index.vue";
 import CSetting from "@/layout/tabbar/setting/index.vue";
 </script>
+<script lang="ts">
+export default {
+  name: "CTabbar",
+};
+</script>
 
 <style scoped lang="scss">
 .tabbar {

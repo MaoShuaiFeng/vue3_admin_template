@@ -9,6 +9,11 @@
 </template>
 
 <script setup lang="ts"></script>
+<script lang="ts">
+export default {
+  name: "CMain",
+};
+</script>
 
 <style scoped>
 .fade-enter-from {

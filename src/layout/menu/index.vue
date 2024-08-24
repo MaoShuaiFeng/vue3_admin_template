@@ -60,6 +60,7 @@ const goRoute = (vc: {
   $router.push({ name: String(vc.index) });
 };
 </script>
+
 <script lang="ts">
 export default {
   name: "CMenu",
