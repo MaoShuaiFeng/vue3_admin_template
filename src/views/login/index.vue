@@ -126,8 +126,9 @@ const rules = {
 
 .login_form {
   position: relative;
-  width: 80%;
+  width: 70%;
   top: 30vh;
+  margin: 0 auto;
   padding: 40px;
   background: rgba(206, 204, 204, 0.3);
   -webkit-backdrop-filter: blur(8px);
