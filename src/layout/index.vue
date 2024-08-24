@@ -7,7 +7,7 @@
       <!-- 滚动组件 -->
       <el-scrollbar class="scrollbar">
         <!-- 菜单组件 -->
-        <el-menu>
+        <el-menu :default-active="$route.name">
           <CMenu :menuList="userStore.menuRoutes"></CMenu>
         </el-menu>
       </el-scrollbar>
@@ -22,13 +22,16 @@
 </template>
 
 <script setup lang="ts">
+import { useRoute } from "vue-router";
 import CLogo from "@/layout/logo/index.vue";
 import CMenu from "@/layout/menu/index.vue";
 import CMain from "@/layout/main/index.vue";
 //获取用户相关小仓库
 import useUserStore from "@/store/modules/user";
-
 let userStore = useUserStore();
+
+let $route = useRoute();
+
 </script>
 
 <style scoped lang="scss">

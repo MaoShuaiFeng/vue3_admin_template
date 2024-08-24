@@ -7,8 +7,8 @@
         @click="goRoute"
         :index="item.name"
       >
+        <svg-icon :name="item.meta.icon"></svg-icon>
         <template #title>
-          <svg-icon :name="item.meta.icon"></svg-icon>
           <span>{{ item.meta.title }}</span>
         </template>
       </el-menu-item>
@@ -21,8 +21,8 @@
         @click="goRoute"
         :index="item.children[0].name"
       >
+        <svg-icon :name="item.children[0].meta.icon"></svg-icon>
         <template #title>
-          <svg-icon :name="item.children[0].meta.icon"></svg-icon>
           <span>{{ item.children[0].meta.title }}</span>
         </template>
       </el-menu-item>
