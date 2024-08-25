@@ -1,12 +1,17 @@
 <template>
   <!-- 刷新 -->
   <el-button
+    @click="updateRefreshFn"
     size="small"
     icon="Refresh"
     circle
-    @click="updateRefreshFn"
   ></el-button>
-  <el-button size="small" icon="FullScreen" circle></el-button>
+  <el-button
+    size="small"
+    icon="FullScreen"
+    circle
+    @click="fullScreenFn"
+  ></el-button>
   <el-button size="small" icon="Setting" circle></el-button>
   <img
     src="/vite.svg"
@@ -32,8 +37,23 @@
 <script setup lang="ts">
 import useLayOutSettingStore from "@/store/modules/setting";
 let layoutSettingStore = useLayOutSettingStore();
+//点击更新
 const updateRefreshFn = () => {
   layoutSettingStore.isRefresh = !layoutSettingStore.isRefresh;
+};
+// 点击全屏
+// 定义一个全屏函数
+const fullScreenFn = () => {
+  // 获取当前是否处于全屏状态
+  let isFullScreen = document.fullscreenElement;
+  // 如果不处于全屏状态
+  if (!isFullScreen) {
+    // 请求全屏
+    document.documentElement.requestFullscreen();
+  } else {
+    // 否则退出全屏
+    document.exitFullscreen();
+  }
 };
 </script>
 <script lang="ts">
