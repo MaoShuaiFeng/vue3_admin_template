@@ -45,12 +45,13 @@
 import { User, Lock } from "@element-plus/icons-vue";
 import { reactive, ref } from "vue";
 import useUserStore from "../../store/modules/user";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 import { ElNotification } from "element-plus";
 import { getTime } from "../../utils/time";
 
 let userStore = useUserStore();
 let $router = useRouter();
+let $route = useRoute();
 
 let loginFormRef = ref();
 
@@ -69,7 +70,14 @@ const login = async () => {
     //表单校验通过再发请求
     loading.value = true;
     await userStore.userLogin(loginForm);
-    $router.push("/");
+    //判断当前路由是否有query参数
+    if ($route.query) {
+      //有query参数，跳转到query参数中的地址
+      $router.push($route.query.redirect as string);
+    } else {
+      //没有query参数，跳转到首页
+      $router.push("/");
+    }
     //登陆成功获取用户信息
     await userStore.getUserInfo();
     ElNotification({

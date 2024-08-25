@@ -3,7 +3,7 @@ import { defineStore } from "pinia";
 import { reqLogin, reqUserInfo } from "@/api/user";
 import type { loginForm, loginResponseData } from "../../api/user/type";
 import type { UserState } from "./types/types";
-import { SET_TOKEN, GET_TOKEN } from "../../utils/token";
+import { SET_TOKEN, GET_TOKEN, REMOVE_TOKEN } from "../../utils/token";
 //引入常量路由
 import { constantRoutes } from "@/router/routes";
 
@@ -41,6 +41,13 @@ const useUserStore = defineStore("User", {
       } else {
         return Promise.reject(new Error(result.data.message));
       }
+    },
+    //退出登录
+    async userLogoutFn() {
+      this.token = "";
+      this.userName = "";
+      this.avatar = "";
+      REMOVE_TOKEN();
     },
   },
 });

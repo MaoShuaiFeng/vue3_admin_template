@@ -31,7 +31,7 @@
     </span>
     <template #dropdown>
       <el-dropdown-menu>
-        <el-dropdown-item>退出登录</el-dropdown-item>
+        <el-dropdown-item @click="userLogoutFn">退出登录</el-dropdown-item>
       </el-dropdown-menu>
     </template>
   </el-dropdown>
@@ -40,6 +40,10 @@
 <script setup lang="ts">
 import useLayOutSettingStore from "@/store/modules/setting";
 import useUserStore from "@/store/modules/user";
+import { useRouter, useRoute } from "vue-router";
+
+let $router = useRouter();
+let $route = useRoute();
 
 let layoutSettingStore = useLayOutSettingStore();
 let userStore = useUserStore();
@@ -60,6 +64,12 @@ const fullScreenFn = () => {
     // 否则退出全屏
     document.exitFullscreen();
   }
+};
+// 退出登录
+// 发请求退出登录,清除token,跳转到登录页
+const userLogoutFn = () => {
+  userStore.userLogoutFn();
+  $router.push({ path: "/login", query: { redirect: $route.fullPath } });
 };
 </script>
 <script lang="ts">
