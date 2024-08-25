@@ -28,6 +28,7 @@ interface userInfo {
 }
 
 interface user {
+  message?: string | undefined;
   checkUser: userInfo;
 }
 

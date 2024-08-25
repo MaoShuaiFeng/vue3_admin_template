@@ -49,7 +49,7 @@ import { useRouter } from "vue-router";
 import { ElNotification } from "element-plus";
 import { getTime } from "../../utils/time";
 
-let useStore = useUserStore();
+let userStore = useUserStore();
 let $router = useRouter();
 
 let loginFormRef = ref();
@@ -68,10 +68,12 @@ const login = async () => {
   try {
     //表单校验通过再发请求
     loading.value = true;
-    await useStore.userLogin(loginForm);
+    await userStore.userLogin(loginForm);
     $router.push("/");
+    //登陆成功获取用户信息
+    await userStore.getUserInfo();
     ElNotification({
-      title: `HI,${getTime()}`,
+      title: `HI,${userStore.userName}!  ${getTime()}!`,
       message: "欢迎回来",
       type: "success",
     });

@@ -6,22 +6,25 @@
     icon="Refresh"
     circle
   ></el-button>
+  <!-- 全屏 -->
   <el-button
     size="small"
     icon="FullScreen"
     circle
     @click="fullScreenFn"
   ></el-button>
+  <!-- 设置 -->
   <el-button size="small" icon="Setting" circle></el-button>
+  <!-- 头像 -->
   <img
-    src="/vite.svg"
-    style="width: 23px; height: 23px; margin: 0 14px"
+    :src="userStore.avatar"
+    style="width: 23px; height: 23px; margin: 0 14px; border-radius: 50%"
     alt="Avatar"
   />
   <!-- 下拉菜单 -->
   <el-dropdown>
     <span class="el-dropdown-link">
-      admin
+      {{ userStore.userName }}
       <el-icon class="el-icon--right">
         <arrow-down />
       </el-icon>
@@ -36,7 +39,10 @@
 
 <script setup lang="ts">
 import useLayOutSettingStore from "@/store/modules/setting";
+import useUserStore from "@/store/modules/user";
+
 let layoutSettingStore = useLayOutSettingStore();
+let userStore = useUserStore();
 //点击更新
 const updateRefreshFn = () => {
   layoutSettingStore.isRefresh = !layoutSettingStore.isRefresh;
