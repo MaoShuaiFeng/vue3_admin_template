@@ -3,8 +3,8 @@
   <el-button size="small" icon="FullScreen" circle></el-button>
   <el-button size="small" icon="Setting" circle></el-button>
   <img
-    src="../../../../public/vite.svg"
-    style="width: 23px; height: 23px; margin: 0 12px"
+    src="/vite.svg"
+    style="width: 23px; height: 23px; margin: 0 14px"
     alt="Avatar"
   />
   <!-- 下拉菜单 -->

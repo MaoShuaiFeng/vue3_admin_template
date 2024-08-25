@@ -15,9 +15,7 @@ export const constantRoutes = [
     redirect: "/home", //重定向
     component: () => import("@/layout/index.vue"),
     meta: {
-      title: "layout",
       hidden: false,
-      icon: "Promotion",
     },
     children: [
       {
@@ -66,6 +64,7 @@ export const constantRoutes = [
   {
     path: "/product",
     name: "Product",
+    redirect: "/product/attr",
     component: () => import("@/layout/index.vue"),
     meta: {
       title: "商品管理",
@@ -119,6 +118,7 @@ export const constantRoutes = [
   {
     path: "/acl",
     name: "Acl",
+    redirect: "/acl/user",
     component: () => import("@/layout/index.vue"),
     meta: {
       title: "权限管理",
