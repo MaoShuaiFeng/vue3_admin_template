@@ -3,12 +3,31 @@
   <router-view v-slot="{ Component }">
     <transition name="fade">
       <!-- 渲染layout以及路由的子路由 -->
-      <component :is="Component" />
+      <component :is="Component" v-if="isDestroy" />
     </transition>
   </router-view>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import useLayOutSettingStore from "@/store/modules/setting";
+import { ref, watch, nextTick } from "vue";
+
+let layoutSettingStore = useLayOutSettingStore();
+
+//控制当前组件是否销毁重建
+let isDestroy = ref(true);
+
+//监听用户是否刷新页面
+watch(
+  () => layoutSettingStore.isRefresh,
+  () => {
+    isDestroy.value = false;
+    nextTick(() => {
+      isDestroy.value = true;
+    });
+  }
+);
+</script>
 <script lang="ts">
 export default {
   name: "CMain",

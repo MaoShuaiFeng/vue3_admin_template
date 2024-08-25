@@ -1,5 +1,11 @@
 <template>
-  <el-button size="small" icon="Refresh" circle></el-button>
+  <!-- 刷新 -->
+  <el-button
+    size="small"
+    icon="Refresh"
+    circle
+    @click="updateRefreshFn"
+  ></el-button>
   <el-button size="small" icon="FullScreen" circle></el-button>
   <el-button size="small" icon="Setting" circle></el-button>
   <img
@@ -23,7 +29,13 @@
   </el-dropdown>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import useLayOutSettingStore from "@/store/modules/setting";
+let layoutSettingStore = useLayOutSettingStore();
+const updateRefreshFn = () => {
+  layoutSettingStore.isRefresh = !layoutSettingStore.isRefresh;
+};
+</script>
 <script lang="ts">
 export default {
   name: "CSetting",

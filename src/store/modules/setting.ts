@@ -6,6 +6,8 @@ const useLayOutSettingStore = defineStore("LayoutSetting", {
     return {
       //是否折叠
       isCollapse: false,
+      //刷新状态
+      isRefresh: false,
     };
   },
 });
