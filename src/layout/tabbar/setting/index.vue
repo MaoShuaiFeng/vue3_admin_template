@@ -67,8 +67,8 @@ const fullScreenFn = () => {
 };
 // 退出登录
 // 发请求退出登录,清除token,跳转到登录页
-const userLogoutFn = () => {
-  userStore.userLogoutFn();
+const userLogoutFn = async () => {
+  await userStore.userLogoutFn();
   $router.push({ path: "/login", query: { redirect: $route.fullPath } });
 };
 </script>

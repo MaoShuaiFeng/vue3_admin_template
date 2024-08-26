@@ -1,7 +1,6 @@
 //创建用户小仓库
 import { defineStore } from "pinia";
-import { reqLogin, reqUserInfo } from "@/api/user";
-import type { loginForm, loginResponseData } from "../../api/user/type";
+import { reqLogin, reqUserInfo, reqLogout } from "@/api/user";
 import type { UserState } from "./types/types";
 import { SET_TOKEN, GET_TOKEN, REMOVE_TOKEN } from "../../utils/token";
 //引入常量路由
@@ -12,23 +11,23 @@ const useUserStore = defineStore("User", {
     return {
       token: GET_TOKEN(), //用户唯一标识
       menuRoutes: constantRoutes, //仓库存储菜单需要的数组（路由）
-      userName: "", //用户名称
+      username: "", //用户名称
       avatar: "", //用户头像
     };
   },
   getters: {},
   actions: {
     // 登录
-    async userLogin(data: loginForm) {
-      const result: loginResponseData = await reqLogin(data);
+    async userLogin(data: any) {
+      const result: any = await reqLogin(data);
       if (result.code === 200) {
-        this.token = result.data.token as string;
+        this.token = result.data as string;
         //本地持久化存储token
-        SET_TOKEN(result.data.token as string);
+        SET_TOKEN(result.data as string);
         //返回一个成功的promise
         return "ok";
       } else {
-        return Promise.reject(new Error(result.data.message));
+        return Promise.reject(new Error(result.data));
       }
     },
     //获取用户信息
@@ -36,19 +35,22 @@ const useUserStore = defineStore("User", {
       const result = await reqUserInfo();
       //如果获取用户信息成功
       if (result.code === 200) {
-        this.userName = result.data.checkUser.username;
-        this.avatar = result.data.checkUser.avatar;
+        this.username = result.data.name;
+        this.avatar = result.data.avatar;
         return "ok";
       } else {
-        return Promise.reject(new Error(result.data.message));
+        return Promise.reject(new Error(result.message));
       }
     },
     //退出登录
     async userLogoutFn() {
+      const result = await reqLogout();
+      if (result.code !== 200) return Promise.reject(new Error(result.message));
       this.token = "";
-      this.userName = "";
+      this.username = "";
       this.avatar = "";
       REMOVE_TOKEN();
+      return "ok";
     },
   },
 });

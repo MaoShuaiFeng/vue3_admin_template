@@ -21,7 +21,7 @@ router.beforeEach(async (to: any, from: any, next: any) => {
   document.title = setting.title + "-" + to.meta.title; //设置页面标题
   nprogress.start();
   const token = userStore.token;
-  const username = userStore.userName;
+  const username = userStore.username;
   if (token) {
     if (to.path == "/login") {
       next({ path: "/home" });
@@ -35,7 +35,7 @@ router.beforeEach(async (to: any, from: any, next: any) => {
           next();
         } catch (error) {
           // token过期，删除token，跳转到登录页
-          userStore.userLogoutFn();
+          await userStore.userLogoutFn();
           next({ path: "/login", query: { redirect: to.path } });
         }
       }

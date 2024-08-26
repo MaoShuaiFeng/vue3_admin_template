@@ -78,10 +78,10 @@ const login = async () => {
       //没有query参数，跳转到首页
       $router.push("/");
     }
-    //登陆成功获取用户信息
-    await userStore.getUserInfo();
+    // //登陆成功获取用户信息
+    // await userStore.getUserInfo();
     ElNotification({
-      title: `HI,${userStore.userName}!  ${getTime()}!`,
+      title: `HI,${userStore.username}!  ${getTime()}!`,
       message: "欢迎回来",
       type: "success",
     });
