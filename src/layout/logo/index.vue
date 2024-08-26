@@ -36,6 +36,7 @@ export default {
   p {
     font-size: $base-menu-logo-font-size;
     margin-left: 15px;
+    white-space: nowrap;
   }
 }
 .fade-enter-from {
@@ -43,7 +44,7 @@ export default {
   scale: 0;
 }
 .fade-enter-active {
-  transition: all .3s;
+  transition: all 0.3s;
 }
 .fade-enter-to {
   opacity: 1;
