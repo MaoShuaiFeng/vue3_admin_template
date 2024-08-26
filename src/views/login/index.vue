@@ -71,7 +71,7 @@ const login = async () => {
     loading.value = true;
     await userStore.userLogin(loginForm);
     //判断当前路由是否有query参数
-    if ($route.query) {
+    if ($route.query && $route.query.redirect) {
       //有query参数，跳转到query参数中的地址
       $router.push($route.query.redirect as string);
     } else {
