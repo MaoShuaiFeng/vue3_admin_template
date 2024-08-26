@@ -70,6 +70,8 @@ const login = async () => {
     //表单校验通过再发请求
     loading.value = true;
     await userStore.userLogin(loginForm);
+    // //登陆成功获取用户信息
+    await userStore.getUserInfo();
     //判断当前路由是否有query参数
     if ($route.query && $route.query.redirect) {
       //有query参数，跳转到query参数中的地址
@@ -78,8 +80,6 @@ const login = async () => {
       //没有query参数，跳转到首页
       $router.push("/");
     }
-    // //登陆成功获取用户信息
-    // await userStore.getUserInfo();
     ElNotification({
       title: `HI,${userStore.username}!  ${getTime()}!`,
       message: "欢迎回来",
