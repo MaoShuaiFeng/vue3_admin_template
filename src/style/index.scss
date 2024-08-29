@@ -3,15 +3,15 @@
 
 //滚动条外观设置
 ::-webkit-scrollbar{
-    width: 10px;
+    width: 6px;
 }
 
 ::-webkit-scrollbar-track{
-    background-color: red;
+    background-image: linear-gradient(to bottom, #e0c3fc 0%, #8ec5fc 100%);
 }
 
 ::-webkit-scrollbar-thumb{
-    width: 10px;
-    background-color: blue;
+    width: 6px;
+    background-color: rgb(81, 81, 230);
     border-radius: 10px;
 }
