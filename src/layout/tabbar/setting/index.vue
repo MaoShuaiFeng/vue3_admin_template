@@ -24,7 +24,7 @@
   <!-- 下拉菜单 -->
   <el-dropdown>
     <span class="el-dropdown-link">
-      {{ userStore.userName }}
+      {{ userStore.username }}
       <el-icon class="el-icon--right">
         <arrow-down />
       </el-icon>
