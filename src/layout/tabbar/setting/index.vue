@@ -11,7 +11,7 @@
     size="small"
     icon="FullScreen"
     circle
-    @click="fullScreenFn"
+    @click="changeFullScreen"
   ></el-button>
   <!-- 设置 -->
   <el-button size="small" icon="Setting" circle></el-button>
@@ -38,6 +38,7 @@
 </template>
 
 <script setup lang="ts">
+import { ref, onBeforeUnmount } from "vue";
 import useLayOutSettingStore from "@/store/modules/setting";
 import useUserStore from "@/store/modules/user";
 import { useRouter, useRoute } from "vue-router";
@@ -47,17 +48,31 @@ let $route = useRoute();
 
 let layoutSettingStore = useLayOutSettingStore();
 let userStore = useUserStore();
-//点击更新
-const updateRefreshFn = () => {
-  layoutSettingStore.isRefresh = !layoutSettingStore.isRefresh;
+
+let isFullScreen = ref(document.fullscreenElement);
+
+const changeIsFullScreen = () => {
+  isFullScreen.value = document.fullscreenElement;
 };
+
+const KeyDown = (event: KeyboardEvent) => {
+  // 监听按键事件
+  // 如果按下了F11
+  if (event.key === "F11") {
+    event.preventDefault();
+    changeFullScreen();
+  }
+};
+
+window.addEventListener("keydown", KeyDown, true); // 监听按键事件
+window.addEventListener("resize", changeIsFullScreen, false);
+
 // 点击全屏
 // 定义一个全屏函数
-const fullScreenFn = () => {
+const changeFullScreen = () => {
   // 获取当前是否处于全屏状态
-  let isFullScreen = document.fullscreenElement;
   // 如果不处于全屏状态
-  if (!isFullScreen) {
+  if (!isFullScreen.value) {
     // 请求全屏
     document.documentElement.requestFullscreen();
   } else {
@@ -65,6 +80,18 @@ const fullScreenFn = () => {
     document.exitFullscreen();
   }
 };
+
+onBeforeUnmount(() => {
+  // 卸载事件监听
+  window.removeEventListener("keydown", KeyDown);
+  window.removeEventListener("resize", changeIsFullScreen);
+});
+
+//点击更新
+const updateRefreshFn = () => {
+  layoutSettingStore.isRefresh = !layoutSettingStore.isRefresh;
+};
+
 // 退出登录
 // 发请求退出登录,清除token,跳转到登录页
 const userLogoutFn = async () => {
