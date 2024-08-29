@@ -41,7 +41,7 @@ export default {
 }
 
 .fade-enter-active {
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
 }
 
 .fade-enter-to {
