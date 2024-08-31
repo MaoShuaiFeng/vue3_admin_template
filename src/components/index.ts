@@ -1,7 +1,10 @@
-import SvgIcon from "./SvgIcon/index.vue";
-import * as ElementPlusIconsVue from "@element-plus/icons-vue"; // 引入element-plus图标
 import type { App, Component } from "vue";
-const components: { [name: string]: Component } = { SvgIcon };
+import * as ElementPlusIconsVue from "@element-plus/icons-vue"; // 引入element-plus图标
+import SvgIcon from "./SvgIcon/index.vue";
+import Category from "./Category/index.vue";
+
+const components: { [name: string]: Component } = { SvgIcon, Category };
+
 export default {
   install(app: App) {
     Object.keys(components).forEach((key: string) => {
@@ -9,7 +12,7 @@ export default {
     });
     // 引入element-plus图标
     for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
-      app.component(key, component)
+      app.component(key, component);
     }
   },
 };
