@@ -3,9 +3,8 @@ import axios from "axios";
 import { ElMessage } from "element-plus";
 //引入用户相关的小仓库
 import useUserStore from "@/store/modules/user";
-
 const request = axios.create({
-  baseURL: import.meta.env.VITE_APP_BASE_API,
+  // baseURL: import.meta.env.VITE_APP_BASE_API,
   timeout: 5000,
 });
 

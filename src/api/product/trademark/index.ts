@@ -2,16 +2,18 @@ import type { TradeMarkResponseData, TradeMark } from "./type";
 // 品牌管理
 import request from "@/utils/request";
 
+const BASE_URL = "/pd-api/admin/product/";
+
 // 地址
 enum API {
   // 获取品牌列表的地址
-  TRADEMARK_URL = "/admin/product/baseTrademark/",
+  TRADEMARK_URL = BASE_URL + "baseTrademark/",
   // 添加
-  ADD_TRADEMARK_URL = "/admin/product/baseTrademark/save/",
+  ADD_TRADEMARK_URL = BASE_URL + "baseTrademark/save/",
   //修改
-  UPDATE_TRADEMARK_URL = "/admin/product/baseTrademark/update/",
+  UPDATE_TRADEMARK_URL = BASE_URL + "baseTrademark/update/",
   // 删除
-  DELETE_TRADEMARK_URL = "/admin/product/baseTrademark/remove/",
+  DELETE_TRADEMARK_URL = BASE_URL + "baseTrademark/remove/",
 }
 
 // 获取品牌接口

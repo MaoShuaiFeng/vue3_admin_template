@@ -38,10 +38,17 @@ export default defineConfig(({ command, mode }) => {
     },
     server: {
       proxy: {
+        //用户相关
         [env.VITE_APP_BASE_API]: {
           target: env.VITE_SERVER,
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api/, ""),
+        },
+        //商品接口代理
+        "/pd-api": {
+          target: "http://39.98.123.211:8510",
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/pd-api/, ""),
         },
       },
     },

@@ -86,7 +86,7 @@
         <el-form-item label="品牌Logo" label-width="90px" prop="logoUrl">
           <el-upload
             class="avatar-uploader"
-            action="api/admin/product/fileUpload"
+            action="pd-api/admin/product/fileUpload"
             :show-file-list="false"
             :on-success="handleAvatarSuccess"
             :before-upload="beforeAvatarUpload"

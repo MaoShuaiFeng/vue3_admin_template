@@ -5,11 +5,14 @@ import type {
   loginResponseData,
   userInfoResponseData,
 } from "./type";
+
+const BASE_URL = "/api/admin/acl/index/";
+
 // 项目用户相关的地址
 enum API {
-  LOGIN_URL = "/admin/acl/index/login",
-  USERINFO_URL = "/admin/acl/index/info",
-  LOGOUT_URL = "/admin/acl/index/logout",
+  LOGIN_URL = BASE_URL + "login",
+  USERINFO_URL = BASE_URL + "info",
+  LOGOUT_URL = BASE_URL + "logout",
 }
 
 // 登录接口
