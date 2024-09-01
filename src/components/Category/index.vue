@@ -54,7 +54,12 @@ import { onMounted} from "vue";
 import useCategoryStore from "@/store/modules/category";
 
 // 接收父组件传过来的值
-defineProps(["isTable"]);
+defineProps({
+  isTable: {
+    type: Boolean,
+    default: true,
+  },
+});
 
 let categoryStore = useCategoryStore();
 

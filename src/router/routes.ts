@@ -93,16 +93,6 @@ export const constantRoutes = [
         },
       },
       {
-        path: "sku",
-        name: "Sku",
-        component: () => import("@/views/product/sku/index.vue"),
-        meta: {
-          title: "SKU管理",
-          hidden: false,
-          icon: "Lollipop",
-        },
-      },
-      {
         path: "spu",
         name: "Spu",
         component: () => import("@/views/product/spu/index.vue"),
@@ -110,6 +100,16 @@ export const constantRoutes = [
           title: "SPU管理",
           hidden: false,
           icon: "Box",
+        },
+      },
+      {
+        path: "sku",
+        name: "Sku",
+        component: () => import("@/views/product/sku/index.vue"),
+        meta: {
+          title: "SKU管理",
+          hidden: false,
+          icon: "Lollipop",
         },
       },
     ],
