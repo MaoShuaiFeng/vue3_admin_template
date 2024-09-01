@@ -64,6 +64,7 @@
         :background="true"
         layout="prev, pager, next, jumper, ->, sizes , total"
         :pager-count="7"
+        :disabled="undefined"
         :total="total"
         @size-change="pageSizeChangeFn"
         @current-change="getHasTrademark"
