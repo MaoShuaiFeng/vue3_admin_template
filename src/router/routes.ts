@@ -73,6 +73,16 @@ export const constantRoutes = [
     },
     children: [
       {
+        path: "trademark",
+        name: "Trademark",
+        component: () => import("@/views/product/trademark/index.vue"),
+        meta: {
+          title: "品牌管理",
+          hidden: false,
+          icon: "Coin",
+        },
+      },
+      {
         path: "attr",
         name: "Attr",
         component: () => import("@/views/product/attr/index.vue"),
@@ -100,16 +110,6 @@ export const constantRoutes = [
           title: "SPU管理",
           hidden: false,
           icon: "Box",
-        },
-      },
-      {
-        path: "trademark",
-        name: "Trademark",
-        component: () => import("@/views/product/trademark/index.vue"),
-        meta: {
-          title: "品牌管理",
-          hidden: false,
-          icon: "Coin",
         },
       },
     ],
