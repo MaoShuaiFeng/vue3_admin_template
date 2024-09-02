@@ -41,16 +41,46 @@
         ></el-table-column>
         <el-table-column label="操作" width="250px" fixed="right">
           <template #default="{ row }">
-            <el-button type="" size="small" icon="Top" plain></el-button>
-            <el-button type="" size="small" icon="Edit" plain></el-button>
-            <el-button type="" size="small" icon="InfoFilled" plain></el-button>
             <el-button
-              type=""
+              :type="row.isSale === 1 ? 'warning' : 'success'"
               size="small"
-              icon="Delete"
+              :icon="row.isSale === 1 ? 'Bottom' : 'Top'"
+              :title="row.isSale === 1 ? '下架' : '上架'"
               plain
-            ></el-button> </template
-        ></el-table-column>
+              @click="updateSale(row)"
+            ></el-button>
+            <el-button
+              type="primary"
+              size="small"
+              icon="Edit"
+              plain
+              title="编辑---正在开发中"
+            ></el-button>
+            <el-button
+              type="default"
+              size="small"
+              icon="InfoFilled"
+              plain
+              title="查看"
+            ></el-button>
+            <el-popconfirm
+              :title="`您确认要删除- ${row.skuName} -吗?`"
+              icon="Delete"
+              icon-color="#f56c6c"
+              width="250"
+            >
+              <template #reference>
+                <el-button
+                  type="danger"
+                  size="small"
+                  icon="Delete"
+                  title="删除"
+                  plain
+                ></el-button>
+              </template>
+            </el-popconfirm>
+          </template>
+        </el-table-column>
       </el-table>
       <el-pagination
         v-model:current-page="pageNo"
@@ -70,9 +100,10 @@
 </template>
 
 <script setup lang="ts">
-import { reqSkuList } from "@/api/product/sku";
+import { reqCancelSaleSku, reqSaleSku, reqSkuList } from "@/api/product/sku";
 import { SkuResponseData } from "@/api/product/sku/type";
 import { SkuData } from "@/api/product/spu/type";
+import { ElMessage } from "element-plus";
 import { onMounted, ref } from "vue";
 
 let pageNo = ref(1);
@@ -96,6 +127,16 @@ const handleCurrentChange = (pager: number) => {
 const handleSizeChange = (size: number) => {
   pageSize.value = size;
   getSkuList();
+};
+const updateSale = async (row: SkuData) => {
+  if (row.isSale === 1) {
+    await reqCancelSaleSku(row.id!);
+    ElMessage.success("下架成功");
+  } else {
+    await reqSaleSku(row.id!);
+    ElMessage.success("上架成功");
+  }
+  getSkuList(pageNo.value);
 };
 
 onMounted(() => {

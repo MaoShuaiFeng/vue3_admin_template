@@ -105,6 +105,7 @@ export interface SaleAttr {
 }
 
 export interface SkuData {
+  id?: number;
   category3Id: number | string;
   spuId: number | string;
   tmId: number | string;
@@ -115,6 +116,7 @@ export interface SkuData {
   skuAttrValueList: Attr[];
   skuSaleAttrValueList: SaleAttr[];
   skuDefaultImg: string;
+  isSale?: number;
 }
 
 export interface SkuInfoData extends ResponseData {
