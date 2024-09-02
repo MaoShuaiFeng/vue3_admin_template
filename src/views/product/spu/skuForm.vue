@@ -1,34 +1,34 @@
 <template>
   <div>
-    <el-form label-width="100px">
-      <el-form-item label="SKU名称">
+    <el-form ref="formRef" :model="skuParams" label-width="100px">
+      <el-form-item prop="skuName" label="SKU名称">
         <el-input
           v-model="skuParams.skuName"
           placeholder="请输入SPU名称"
         ></el-input>
       </el-form-item>
-      <el-form-item label="价格（元）">
+      <el-form-item prop="price" label="价格（元）">
         <el-input
           v-model="skuParams.price"
           placeholder="请输入价格"
           type="number"
         ></el-input>
       </el-form-item>
-      <el-form-item label="重量（g）">
+      <el-form-item prop="weight" label="重量（g）">
         <el-input
           v-model="skuParams.weight"
           placeholder="请输入重量"
           type="number"
         ></el-input>
       </el-form-item>
-      <el-form-item label="SKU描述">
+      <el-form-item prop="skuDesc" label="SKU描述">
         <el-input
           v-model="skuParams.skuDesc"
           placeholder="请输入SKU描述"
           type="textarea"
         ></el-input>
       </el-form-item>
-      <el-form-item label="平台属性">
+      <el-form-item prop="skuAttrValueList" label="平台属性">
         <el-form :inline="true" label-width="80px">
           <el-form-item
             v-for="item in attrArr"
@@ -52,7 +52,7 @@
           </el-form-item>
         </el-form>
       </el-form-item>
-      <el-form-item label="销售属性">
+      <el-form-item prop="skuSaleAttrValueList" label="销售属性">
         <el-form :inline="true" label-width="80px">
           <el-form-item
             v-for="item in saleArr"
@@ -76,7 +76,7 @@
           </el-form-item>
         </el-form>
       </el-form-item>
-      <el-form-item label="图片名称">
+      <el-form-item prop="skuDefaultImg" label="图片名称">
         <el-table
           ref="tableRef"
           border
@@ -145,9 +145,10 @@ let skuParams = ref<SkuData>({
   skuDefaultImg: "",
 });
 let tableRef = ref();
+let formRef = ref();
 const cancel = () => {
   $emit("changeScene", 0, true, false);
-  // clearData();
+  formRef.value.resetFields();
 };
 const save = async () => {
   //收集平台属性
@@ -177,6 +178,7 @@ const save = async () => {
   if (result.code === 200) {
     ElMessage.success("添加成功");
     $emit("changeScene", 0, false);
+    formRef.value.resetFields();
   } else {
     ElMessage.error("添加失败");
   }
