@@ -6,6 +6,7 @@ import type {
   ImageListResponseData,
   SaleAttrResponseData,
   SkuData,
+  SkuInfoData,
   SpuData,
   TradeMarkListResponseData,
 } from "./type";
@@ -29,6 +30,8 @@ enum API {
   DELETE_SPU_URL = BASE_URL + "deleteSpu/",
   //追加一个新的sku
   ADD_SKU_URL = BASE_URL + "saveSkuInfo",
+  // 查看SPU下售卖的商品
+  SKUINFO_URL = BASE_URL + "findBySpuId/",
 }
 
 export const reqHasSpu = (
@@ -66,3 +69,6 @@ export const reqDeleteSpu = (spuId: number) =>
 
 export const reqAddSku = (data: SkuData) =>
   request.post<any, any>(API.ADD_SKU_URL, data);
+
+export const reqSkuList = (spuId: number | string) =>
+  request.get<any, SkuInfoData>(API.SKUINFO_URL + spuId);

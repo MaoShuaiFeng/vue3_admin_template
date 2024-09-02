@@ -52,6 +52,7 @@
                 icon="View"
                 title="查看SKU"
                 plain
+                @click="getSkuList(row)"
               ></el-button>
               <el-popconfirm
                 :title="`您确认要删除- ${row.spuName} -吗?`"
@@ -99,27 +100,42 @@
         @changeScene="changeScene"
       ></SkuForm>
     </el-card>
+    <!-- 展示已有的sku数据 -->
+    <el-dialog v-model="showDialog" title="SKU列表">
+      <el-table :data="skuArr" border>
+        <el-table-column label="名称" prop="skuName"></el-table-column>
+        <el-table-column label="价格" prop="price"></el-table-column>
+        <el-table-column label="重量" prop="weight"></el-table-column>
+        <el-table-column label="图片">
+          <template #default="{ row }">
+            <img :src="row.skuDefaultImg" alt="" />
+          </template>
+        </el-table-column>
+      </el-table>
+    </el-dialog>
   </div>
 </template>
 
 <script setup lang="ts">
 import { onBeforeUnmount, ref, watch } from "vue";
 import useCategoryStore from "@/store/modules/category";
-import { reqDeleteSpu, reqHasSpu } from "@/api/product/spu";
-import type { SpuData } from "@/api/product/spu/type";
+import { reqDeleteSpu, reqHasSpu, reqSkuList } from "@/api/product/spu";
+import type { SkuData, SkuInfoData, SpuData } from "@/api/product/spu/type";
 import SpuForm from "./spuForm.vue";
 import SkuForm from "./skuForm.vue";
 import { ElMessage } from "element-plus";
 
 let categoryStore = useCategoryStore();
 
-let scene = ref<number>(2); //0:显示已有的SPU，1:添加或修改SPU，2:添加SKU
+let scene = ref<number>(0); //0:显示已有的SPU，1:添加或修改SPU，2:添加SKU
 let pageNo = ref<number>(1);
 let pageSize = ref<number>(5);
 let total = ref<number>(0);
 let recordsArr = ref<SpuData[]>([]);
 let spuFormRef = ref();
 let skuFormRef = ref();
+let skuArr = ref<SkuData[]>([]);
+let showDialog = ref(false);
 
 watch(
   () => categoryStore.category3Id,
@@ -194,6 +210,15 @@ const addSKU = async (row: SpuData) => {
     categoryStore.category2Id,
     row
   );
+};
+
+const getSkuList = async (row: SpuData) => {
+  // 获取sku列表
+  let result: SkuInfoData = await reqSkuList(row.id!);
+  if (result.code === 200) {
+    skuArr.value = result.data;
+    showDialog.value = true;
+  }
 };
 
 //组件销毁清空仓库
