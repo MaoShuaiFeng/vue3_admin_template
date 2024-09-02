@@ -21,9 +21,9 @@ export const reqC3 = (category2Id: number) =>
   request.get<any, CategoryResponseData>(API.C3_URL + category2Id);
 
 export const reqAttr = (
-  category1Id: number,
-  category2Id: number,
-  category3Id: number
+  category1Id: number | string,
+  category2Id: number | string,
+  category3Id: number | string
 ) =>
   request.get<any, AttrResponseData>(
     API.ATTR_URL + `${category1Id}/${category2Id}/${category3Id}`

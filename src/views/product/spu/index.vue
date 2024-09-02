@@ -36,6 +36,7 @@
                 size="small"
                 icon="Plus"
                 title="添加SKU"
+                @click="addSKU(row)"
               ></el-button>
               <el-button
                 type="primary"
@@ -92,7 +93,11 @@
         @changeScene="changeScene"
       ></SpuForm>
       <!-- 添加sku 组件 -->
-      <SkuForm v-show="scene === 2"></SkuForm>
+      <SkuForm
+        v-show="scene === 2"
+        ref="skuFormRef"
+        @changeScene="changeScene"
+      ></SkuForm>
     </el-card>
   </div>
 </template>
@@ -108,12 +113,13 @@ import { ElMessage } from "element-plus";
 
 let categoryStore = useCategoryStore();
 
-let scene = ref<number>(0); //0:显示已有的SPU，1:添加或修改SPU，2:添加SKU
+let scene = ref<number>(2); //0:显示已有的SPU，1:添加或修改SPU，2:添加SKU
 let pageNo = ref<number>(1);
 let pageSize = ref<number>(5);
 let total = ref<number>(0);
 let recordsArr = ref<SpuData[]>([]);
 let spuFormRef = ref();
+let skuFormRef = ref();
 
 watch(
   () => categoryStore.category3Id,
@@ -151,13 +157,14 @@ const addSPU = () => {
 };
 
 // sceneNum:0:显示已有的SPU，1：添加或修改SPU，flag:false:添加SPU，true:修改SPU;
-const changeScene = (sceneNum: number, flag: boolean) => {
+const changeScene = (sceneNum: number, flag: boolean, api: boolean = true) => {
   scene.value = sceneNum;
-  console.log(flag, pageNo.value);
-  if (flag) {
-    getSpuList(pageNo.value);
-  } else {
-    getSpuList();
+  if (api) {
+    if (flag) {
+      getSpuList(pageNo.value);
+    } else {
+      getSpuList();
+    }
   }
 };
 
@@ -166,7 +173,7 @@ const updateSPU = (row: SpuData) => {
   spuFormRef.value.initHasSpuData(row);
 };
 
-const deleteSpu = async (row:SpuData) => {
+const deleteSpu = async (row: SpuData) => {
   let result = await reqDeleteSpu(row.id!);
   if (result.code === 200) {
     ElMessage.success("删除品牌成功");
@@ -178,6 +185,15 @@ const deleteSpu = async (row:SpuData) => {
   } else {
     ElMessage.error("删除品牌失败");
   }
+};
+
+const addSKU = async (row: SpuData) => {
+  scene.value = 2;
+  skuFormRef.value.initSkuData(
+    categoryStore.category1Id,
+    categoryStore.category2Id,
+    row
+  );
 };
 
 //组件销毁清空仓库

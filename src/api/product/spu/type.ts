@@ -93,3 +93,26 @@ export interface HsaSaleAttr {
 export interface HasSaleAttrResponseData extends ResponseData {
   data: HsaSaleAttr[];
 }
+
+export interface Attr {
+  attrId: number;
+  valueId: number;
+}
+export interface SaleAttr {
+  saleAttrId: number;
+  SaleAttrValueId: number;
+  saleIdAndValueId: string;
+}
+
+export interface SkuData {
+  category3Id: number | string;
+  spuId: number | string;
+  tmId: number | string;
+  skuName: string;
+  price: number | string;
+  weight: number | string;
+  skuDesc: string;
+  skuAttrValueList: Attr[];
+  skuSaleAttrValueList: SaleAttr[];
+  skuDefaultImg: string;
+}

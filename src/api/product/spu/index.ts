@@ -1,4 +1,3 @@
-import { reqAddOrUpdateAttr } from "./../attr/index";
 //属性管理
 import request from "@/utils/request";
 import type {
@@ -6,6 +5,7 @@ import type {
   HasSupResponseData,
   ImageListResponseData,
   SaleAttrResponseData,
+  SkuData,
   SpuData,
   TradeMarkListResponseData,
 } from "./type";
@@ -17,7 +17,7 @@ enum API {
   HASSPU_URL = BASE_URL,
   // 获取全部品牌数据
   ALLTRADEMARK_URL = BASE_URL + "baseTrademark/getTrademarkList",
-  // 胡哦去某个SPU下的全部的售卖商品的图片数据
+  // 获取某个SPU下的全部的售卖商品的图片数据
   IMAGE_URL = BASE_URL + "spuImageList/",
   // 获取某个SPU下的全部的销售属性
   SPUATTR_URL = BASE_URL + "spuSaleAttrList/",
@@ -27,6 +27,8 @@ enum API {
   ADD_SPU_URL = BASE_URL + "saveSpuInfo",
   UPDATE_SPU_URL = BASE_URL + "updateSpuInfo",
   DELETE_SPU_URL = BASE_URL + "deleteSpu/",
+  //追加一个新的sku
+  ADD_SKU_URL = BASE_URL + "saveSkuInfo",
 }
 
 export const reqHasSpu = (
@@ -44,7 +46,7 @@ export const reqAllTradeMark = () =>
 export const reqImageList = (spuId: number) =>
   request.get<any, ImageListResponseData>(API.IMAGE_URL + spuId);
 
-export const reqSpuAttr = (spuId: number) =>
+export const reqSpuAttr = (spuId: number | string) =>
   request.get<any, SaleAttrResponseData>(API.SPUATTR_URL + spuId);
 
 export const reqAllSaleAttr = () =>
@@ -61,3 +63,6 @@ export const reqAddOrUpdateSpu = (data: SpuData) => {
 
 export const reqDeleteSpu = (spuId: number) =>
   request.delete<any, any>(API.DELETE_SPU_URL + spuId);
+
+export const reqAddSku = (data: SkuData) =>
+  request.post<any, any>(API.ADD_SKU_URL, data);
