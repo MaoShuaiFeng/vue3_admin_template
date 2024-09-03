@@ -11,6 +11,7 @@ import pinia from "@/store";
 const userStore = useUserStore(pinia);
 
 import setting from "./setting";
+import { ElNotification } from "element-plus";
 
 //全局守卫：全局任意路由切换都会触发
 // 全局前置守卫
@@ -35,6 +36,7 @@ router.beforeEach(async (to: any, from: any, next: any) => {
           next();
         } catch (error) {
           // token过期，删除token，跳转到登录页
+          ElNotification.error("登录信息已过期，请重新登录");
           await userStore.userLogoutFn();
           next({ path: "/login", query: { redirect: to.path } });
         }

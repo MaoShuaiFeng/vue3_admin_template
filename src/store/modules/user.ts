@@ -32,7 +32,7 @@ const useUserStore = defineStore("User", {
         //返回一个成功的promise
         return "ok";
       } else {
-        return Promise.reject(new Error(result.data));
+        return Promise.reject(new Error(result.message));
       }
     },
     //获取用户信息
