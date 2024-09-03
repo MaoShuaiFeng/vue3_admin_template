@@ -11,7 +11,7 @@
           @click="addAttr"
           >添加属性</el-button
         >
-        <el-table :data="attrArr" border style="margin: 20px 0">
+        <el-table :data="attrArr" border style="margin: 20px 0" max-height="calc(100vh - 326px)">
           <el-table-column
             label="序号"
             align="center"

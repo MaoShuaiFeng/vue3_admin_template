@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-card>
-      <el-table :data="skuArr" border>
+      <el-table :data="skuArr" border max-height="calc(100vh - 194px)">
         <el-table-column label="序号" type="index" width="80px" align="center">
           <template #default="{ $index }">
             <span>{{ (pageNo - 1) * pageSize + $index + 1 }}</span>

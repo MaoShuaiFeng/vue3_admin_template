@@ -12,7 +12,7 @@
           @click="addSPU"
           >添加SPU</el-button
         >
-        <el-table :data="recordsArr" border style="margin: 20px 0">
+        <el-table :data="recordsArr" border style="margin: 20px 0" max-height="calc(100vh - 358px)">
           <el-table-column label="序号" width="80" align="center">
             <template #default="{ $index }">
               <span>{{ (pageNo - 1) * pageSize + $index + 1 }}</span>

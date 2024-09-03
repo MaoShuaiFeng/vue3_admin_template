@@ -5,7 +5,7 @@
       添加品牌
     </el-button>
     <!-- 表格 -->
-    <el-table style="margin: 20px auto" border :data="trademarkArr">
+    <el-table style="margin: 20px auto" border :data="trademarkArr" max-height="calc(100vh - 246px)">
       <el-table-column label="序号" width="80" align="center">
         <template #default="{ $index }">
           <span>{{ (pageNo - 1) * limit + $index + 1 }}</span>
