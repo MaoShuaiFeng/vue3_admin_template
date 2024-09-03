@@ -8,8 +8,8 @@ export interface User{
     username?: string;
     password?: string;
     name?: string;
-    phone: string;
-    roleName: string;
+    phone?: string;
+    roleName?: string;
 }
 export type Records = User[];
 
