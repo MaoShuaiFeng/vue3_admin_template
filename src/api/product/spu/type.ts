@@ -95,13 +95,17 @@ export interface HasSaleAttrResponseData extends ResponseData {
 }
 
 export interface Attr {
+  id?: number;
   attrId: number;
+  attrName: string;
   valueId: number;
+  valueName: string;
 }
 export interface SaleAttr {
   saleAttrId: number;
   SaleAttrValueId: number;
   saleIdAndValueId: string;
+  saleAttrValueName?: string;
 }
 
 export interface SkuData {
@@ -117,6 +121,7 @@ export interface SkuData {
   skuSaleAttrValueList: SaleAttr[];
   skuDefaultImg: string;
   isSale?: number;
+  skuImageList?: SpuImage[];
 }
 
 export interface SkuInfoData extends ResponseData {

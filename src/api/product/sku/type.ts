@@ -16,3 +16,7 @@ export interface SkuResponseData extends ResponseData {
     pages: number;
   };
 }
+//商品详情ts类型
+export interface SkuInfoData extends ResponseData {
+  data: SkuData;
+}

@@ -1,5 +1,5 @@
 import request from "@/utils/request";
-import { SkuResponseData } from "./type";
+import { SkuInfoData, SkuResponseData } from "./type";
 
 const BASE_URL = "/pd-api/admin/product/";
 
@@ -9,8 +9,11 @@ enum API {
   // 上架
   SALE_URL = BASE_URL + "onSale/",
   // 下架
-  OFF_SALE_URL = BASE_URL + "cancelSale/"
-
+  OFF_SALE_URL = BASE_URL + "cancelSale/",
+  // 详情
+  DETAIL_URL = BASE_URL + "getSkuById/",
+  //删除
+  DELETE_URL = BASE_URL + "deleteSku/",
 }
 
 export const reqSkuList = (page: number, limit: number) =>
@@ -21,3 +24,9 @@ export const reqSaleSku = (id: number) =>
 
 export const reqCancelSaleSku = (id: number) =>
   request.get<any, any>(API.OFF_SALE_URL + id);
+
+export const reqSkuInfo = (id: number) =>
+  request.get<any, SkuInfoData>(API.DETAIL_URL + id);
+
+export const reqDeleteSku = (id: number) =>
+  request.delete<any, any>(API.DELETE_URL + id);

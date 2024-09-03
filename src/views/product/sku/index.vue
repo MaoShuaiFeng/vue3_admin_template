@@ -2,12 +2,11 @@
   <div>
     <el-card>
       <el-table :data="skuArr" border>
-        <el-table-column
-          label="序号"
-          type="index"
-          width="80px"
-          align="center"
-        ></el-table-column>
+        <el-table-column label="序号" type="index" width="80px" align="center">
+          <template #default="{ $index }">
+            <span>{{ (pageNo - 1) * pageSize + $index + 1 }}</span>
+          </template></el-table-column
+        >
         <el-table-column
           label="名称"
           show-overflow-tooltip
@@ -57,17 +56,19 @@
               title="编辑---正在开发中"
             ></el-button>
             <el-button
-              type="default"
+              type="info"
               size="small"
               icon="InfoFilled"
               plain
               title="查看"
+              @click="findSku(row)"
             ></el-button>
             <el-popconfirm
               :title="`您确认要删除- ${row.skuName} -吗?`"
               icon="Delete"
               icon-color="#f56c6c"
               width="250"
+              @confirm="deleteSku(row.id)"
             >
               <template #reference>
                 <el-button
@@ -96,11 +97,68 @@
         style="margin-top: 20px"
       />
     </el-card>
+    <!-- 抽屉组件展示商品详情 -->
+    <el-drawer v-model="drawer" size="500px" style="background-color: #fdfdfd">
+      <template #header>
+        <h4>商品详情</h4>
+      </template>
+      <template #default>
+        <el-form label-width="70px">
+          <el-form-item label="名称">
+            <el-input v-model="skuInfo.skuName" disabled></el-input>
+          </el-form-item>
+          <el-form-item label="描述">
+            <el-input
+              v-model="skuInfo.skuDesc"
+              disabled
+              type="textarea"
+              autosize
+            ></el-input>
+          </el-form-item>
+          <el-form-item label="价格">
+            <el-input type="number" v-model="skuInfo.price" disabled></el-input>
+          </el-form-item>
+          <el-form-item label="平台属性">
+            <el-tag
+              v-for="tag in skuInfo.skuAttrValueList"
+              :key="tag.id"
+              style="margin: 2px"
+            >
+              {{ tag.attrName }} : {{ tag.valueName }}
+            </el-tag>
+          </el-form-item>
+          <el-form-item label="销售属性">
+            <el-tag
+              v-for="tag in skuInfo.skuSaleAttrValueList"
+              :key="tag.id"
+              style="margin: 2px"
+            >
+              {{ tag.saleAttrName }} : {{ tag.saleAttrValueName }}
+            </el-tag>
+          </el-form-item>
+          <el-form-item label="图片"> </el-form-item>
+          <el-carousel :interval="4000" type="card" height="200px">
+            <el-carousel-item
+              v-for="item in skuInfo.skuImageList"
+              :key="item.id"
+            >
+              <el-image :src="item.imgUrl"></el-image>
+            </el-carousel-item>
+          </el-carousel>
+        </el-form>
+      </template>
+    </el-drawer>
   </div>
 </template>
 
 <script setup lang="ts">
-import { reqCancelSaleSku, reqSaleSku, reqSkuList } from "@/api/product/sku";
+import {
+  reqCancelSaleSku,
+  reqDeleteSku,
+  reqSaleSku,
+  reqSkuInfo,
+  reqSkuList,
+} from "@/api/product/sku";
 import { SkuResponseData } from "@/api/product/sku/type";
 import { SkuData } from "@/api/product/spu/type";
 import { ElMessage } from "element-plus";
@@ -110,6 +168,8 @@ let pageNo = ref(1);
 let pageSize = ref(10);
 let total = ref(0);
 let skuArr = ref<SkuData[]>([]);
+let drawer = ref(false);
+let skuInfo = ref<SkuData>({});
 
 const getSkuList = async (pager = 1) => {
   pageNo.value = pager;
@@ -139,9 +199,46 @@ const updateSale = async (row: SkuData) => {
   getSkuList(pageNo.value);
 };
 
+const findSku = async (row: SkuData) => {
+  skuInfo.value = {} as SkuData;
+  drawer.value = true;
+  let result = await reqSkuInfo(row.id!);
+  skuInfo.value = result.data;
+};
+
+const deleteSku = async (id: number) => {
+  let result = await reqDeleteSku(id);
+  if (result.code === 200) {
+    ElMessage.success("删除成功");
+    // 如果删除的不是第一页的最后一个,页码-1
+    if (pageNo.value !== 1 && skuArr.value.length === 1) {
+      pageNo.value--;
+    }
+    getSkuList(pageNo.value);
+  } else {
+    ElMessage.error("删除失败");
+  }
+};
+
 onMounted(() => {
   getSkuList();
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+:deep(.el-carousel .el-carousel__item h3) {
+  color: #475669;
+  opacity: 0.75;
+  line-height: 300px;
+  margin: 0;
+  text-align: center;
+}
+
+:deep(.el-carousel .el-carousel__item:nth-child(2n)) {
+  background-color: #99a9bf;
+}
+
+:deep(.el-carousel .el-carousel__item:nth-child(2n + 1)) {
+  background-color: #d3dce6;
+}
+</style>
