@@ -36,6 +36,7 @@
               v-model="color"
               show-alpha
               :predefine="predefineColors"
+              @change="changeColor"
             />
           </el-form-item>
           <el-form-item label="暗黑模式">
@@ -116,7 +117,16 @@ let isDark = ref(false);
 
 const changeDark = () => {
   let html = document.documentElement;
-  isDark.value ? (html.className = "dark") : (html.className = "");
+  if (isDark.value) {
+    html.className = "dark";
+  } else {
+    html.className = "";
+  }
+};
+
+const changeColor = (val: string) => {
+  let html = document.documentElement;
+  html.style.setProperty("--el-color-primary", val);
 };
 
 const changeIsFullScreen = () => {
