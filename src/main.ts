@@ -10,6 +10,7 @@ import "./style/index.scss"; // 导入全局样式
 import router from "./router"; //引入路由
 import pinia from "./store"; //引入仓库
 import "@/permission.ts"; //路由鉴权
+import 'element-plus/theme-chalk/dark/css-vars.css' //引入暗黑模式
 
 const app = createApp(App); // 使用createApp创建一个vue实例
 
