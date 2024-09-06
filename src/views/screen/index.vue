@@ -2,12 +2,24 @@
   <div class="container">
     <div ref="screen" class="screen">
       <div class="top">
+        <!-- 顶部栏 -->
         <Top></Top>
       </div>
       <div class="bottom">
-        <div class="left"></div>
-        <div class="center"></div>
-        <div class="right"></div>
+        <div class="left">
+          <Tourist></Tourist>
+          <Sex></Sex>
+          <Age></Age>
+        </div>
+        <div class="center">
+          <Map class="map"></Map>
+          <Line class="line"></Line>
+        </div>
+        <div class="right">
+          <Rank></Rank>
+          <Year></Year>
+          <Counter></Counter>
+        </div>
       </div>
     </div>
   </div>
@@ -16,6 +28,14 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import Top from "./component/top/index.vue";
+import Tourist from "./component/tourist/index.vue";
+import Sex from "./component/sex/index.vue";
+import Age from "./component/age/index.vue";
+import Map from "./component/map/index.vue";
+import Line from "./component/line/index.vue";
+import Rank from "./component/rank/index.vue";
+import Year from "./component/year/index.vue";
+import Counter from "./component/counter/index.vue";
 //获取数据大屏展示内容的dom元素
 let screen = ref();
 
@@ -64,14 +84,32 @@ window.onresize = () => {
     display: flex;
     width: 100%;
     height: calc(100% - 40px);
+
     .left {
-      flex: 1;
+      width: 27%;
+      display: flex;
+      height: 100%;
+      flex-direction: column;
+      box-sizing: border-box;
     }
     .center {
-      flex: 2;
+      width: 46%;
+      display: flex;
+      flex-direction: column;
+
+      .map {
+        flex: 5;
+      }
+      .line {
+        flex: 2;
+      }
     }
     .right {
-      flex: 1;
+      width: 27%;
+      display: flex;
+      height: 100%;
+      flex-direction: column;
+      box-sizing: border-box;
     }
   }
 }
