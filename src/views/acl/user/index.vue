@@ -100,7 +100,7 @@
           align="center"
           fixed="right"
         >
-          <template #default="{ row, $index }">
+          <template #default="{ row }">
             <el-button
               type="success"
               icon="User"
@@ -396,7 +396,7 @@ const setRole = async (row: User) => {
 };
 
 const saveRole = async () => {
-  let roleIdList = checkedRole.value.map((item) => item.id);
+  let roleIdList = checkedRole.value.map((item:any) => item.id);
   let result = await reqAssignRole(userParams.value.id!, roleIdList);
   if (result.code === 200) {
     ElMessage.success("分配角色成功");

@@ -25,6 +25,7 @@ const goHome = () => {
   router.push("/");
 };
 onMounted(() => {
+  //@ts-ignore
   timer.value = setInterval(() => {
     time.value = moment().format("YYYY年MM月DD日 HH:mm:ss");
   }, 1000);

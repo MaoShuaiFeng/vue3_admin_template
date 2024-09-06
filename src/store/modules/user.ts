@@ -11,6 +11,7 @@ import { SET_TOKEN, GET_TOKEN, REMOVE_TOKEN } from "../../utils/token";
 //引入常量路由
 import { constantRoutes, asyncRoutes, anyRoute } from "@/router/routes";
 import router from "@/router";
+//@ts-ignore
 import cloneDeep from "lodash/cloneDeep";
 
 const filterAsyncRoutes = (asyncRoutes: any, routes: any) => {

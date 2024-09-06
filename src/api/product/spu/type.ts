@@ -102,24 +102,24 @@ export interface Attr {
   valueName: string;
 }
 export interface SaleAttr {
-  saleAttrId: number;
-  SaleAttrValueId: number;
-  saleIdAndValueId: string;
+  saleAttrId?: number;
+  SaleAttrValueId?: number;
+  saleIdAndValueId?: string;
   saleAttrValueName?: string;
 }
 
 export interface SkuData {
   id?: number;
-  category3Id: number | string;
-  spuId: number | string;
-  tmId: number | string;
-  skuName: string;
-  price: number | string;
-  weight: number | string;
-  skuDesc: string;
-  skuAttrValueList: Attr[];
-  skuSaleAttrValueList: SaleAttr[];
-  skuDefaultImg: string;
+  category3Id?: number | string;
+  spuId?: number | string;
+  tmId?: number | string;
+  skuName?: string;
+  price?: number | string;
+  weight?: number | string;
+  skuDesc?: string;
+  skuAttrValueList?: Attr[];
+  skuSaleAttrValueList?: SaleAttr[];
+  skuDefaultImg?: string;
   isSale?: number;
   skuImageList?: SpuImage[];
 }

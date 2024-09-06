@@ -1,6 +1,7 @@
 //路由鉴权
 import router from "@/router";
 //进度条插件----安装nprogress，引入进度条样式
+//@ts-ignore
 import nprogress from "nprogress";
 import "nprogress/nprogress.css";
 nprogress.configure({ showSpinner: false });
@@ -33,10 +34,11 @@ router.beforeEach(async (to: any, from: any, next: any) => {
       } else {
         try {
           await userStore.getUserInfo();
-          next({...to});
+          next({ ...to });
         } catch (error) {
           // token过期，删除token，跳转到登录页
           ElNotification.error("登录信息已过期，请重新登录");
+          console.error("捕获到错误:", error);
           await userStore.userLogoutFn();
           next({ path: "/login", query: { redirect: to.path } });
         }

@@ -63,7 +63,7 @@
           align="center"
           fixed="right"
         >
-          <template #default="{ row, $index }">
+          <template #default="{ row }">
             <el-button
               type="success"
               icon="User"

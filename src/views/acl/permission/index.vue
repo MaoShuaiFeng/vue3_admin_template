@@ -11,7 +11,7 @@
           align="center"
           fixed="right"
         >
-          <template #default="{ row, $index }">
+          <template #default="{ row }">
             <el-button
               :type="row.level === 3 ? 'success' : 'primary'"
               icon="User"

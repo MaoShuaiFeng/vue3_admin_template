@@ -116,7 +116,7 @@
             </template>
           </el-table-column>
           <el-table-column label="操作" width="120px" align="center">
-            <template #default="{ row, $index }">
+            <template #default="{ $index }">
               <el-button
                 type="danger"
                 icon="Delete"

@@ -32,7 +32,7 @@ export interface Attr {
   categoryId: number | string;
   categoryLevel: number;
   attrValueList: AttrValueList;
-  attrIdAndValueId: string;
+  attrIdAndValueId?: string;
 }
 
 export type AttrList = Attr[];

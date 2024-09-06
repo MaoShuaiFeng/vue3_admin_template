@@ -160,7 +160,7 @@ let attrParams = ref<Attr>({
   categoryId: "",
   categoryLevel: 3,
 });
-let inputArr = ref([]);
+let inputArr = ref<any[]>([]);
 
 watch(
   () => categoryStore.category3Id,
@@ -221,6 +221,7 @@ const addAttrTableValue = () => {
     isEdit: true,
   });
   nextTick(() => {
+    //@ts-ignore
     inputArr.value[attrParams.value.attrValueList.length - 1].focus();
   });
 };

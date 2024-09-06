@@ -5,7 +5,7 @@
       "@/*": [
         "src/*"
       ]
-    }
+    },
   },
   "files": [],
   "references": [
@@ -15,5 +15,5 @@
     {
       "path": "./tsconfig.node.json"
     }
-  ]
+  ],
 }
