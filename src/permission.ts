@@ -33,7 +33,7 @@ router.beforeEach(async (to: any, from: any, next: any) => {
       } else {
         try {
           await userStore.getUserInfo();
-          next();
+          next({...to});
         } catch (error) {
           // token过期，删除token，跳转到登录页
           ElNotification.error("登录信息已过期，请重新登录");

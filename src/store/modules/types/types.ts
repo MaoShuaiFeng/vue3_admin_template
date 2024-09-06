@@ -7,6 +7,8 @@ export interface UserState {
   menuRoutes: RouteRecordRaw[];
   username: string;
   avatar: string;
+  buttons: string[];
+  asyncRoutes: any[];
 }
 
 export interface CategoryState {

@@ -1,4 +1,5 @@
 //对外暴露配置路由
+// 常量路由
 export const constantRoutes = [
   {
     path: "/login",
@@ -16,6 +17,7 @@ export const constantRoutes = [
     component: () => import("@/layout/index.vue"),
     meta: {
       hidden: false,
+      level: 1,//显示为一级路由
     },
     children: [
       {
@@ -39,16 +41,7 @@ export const constantRoutes = [
       hidden: true,
     },
   },
-  // 匹配所有未找到的路由，重定向到404页面
-  {
-    path: "/:pathMatch(.*)*",
-    redirect: "/404",
-    name: "NotFound",
-    meta: {
-      title: "notFound",
-      hidden: true,
-    },
-  },
+
   //数据大屏
   {
     path: "/screen",
@@ -60,6 +53,10 @@ export const constantRoutes = [
       icon: "Platform",
     },
   },
+];
+
+// 异步路由
+export const asyncRoutes = [
   //商品管理
   {
     path: "/product",
@@ -159,3 +156,15 @@ export const constantRoutes = [
     ],
   },
 ];
+// 任意路由
+export const anyRoute =
+  // 匹配所有未找到的路由，重定向到404页面
+  {
+    path: "/:pathMatch(.*)*",
+    redirect: "/404",
+    name: "NotFound",
+    meta: {
+      title: "notFound",
+      hidden: true,
+    },
+  };

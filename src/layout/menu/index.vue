@@ -15,7 +15,9 @@
     </template>
 
     <!-- 有且只有一个子路由 -->
-    <template v-if="item.children && item.children.length === 1">
+    <template
+      v-if="item.children && item.children.length === 1 && item.meta.level"
+    >
       <el-menu-item
         v-if="!item.children[0].meta.hidden"
         @click="goRoute"
@@ -30,7 +32,7 @@
 
     <!-- 有多个子路由 -->
     <el-sub-menu
-      v-if="item.children && item.children.length > 1"
+      v-if="item.children && item.children.length >= 1 && !item.meta.level"
       :index="item.name"
     >
       <template #title>
@@ -68,8 +70,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
- .el-menu-item.is-active {
-    background-color: rgb(140, 146, 230);
-    --el-menu-active-color: rgb(2, 26, 29);
-  }
+.el-menu-item.is-active {
+  background-color: rgb(140, 146, 230);
+  --el-menu-active-color: rgb(2, 26, 29);
+}
 </style>
