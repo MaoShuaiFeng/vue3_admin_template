@@ -72,7 +72,7 @@ onMounted(() => {
         ],
         effect: {
           show: true,
-          symbol: "image://https://maoshuaifeng.github.io/blog/logo.svg",
+          symbol: "image://http://1.94.149.99:8088/vite.svg",
           period: 4,
           trailLength: 0.02,
           color: "#00DAFF",
